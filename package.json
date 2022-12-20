@@ -1,0 +1,22 @@
+{
+  "name": "bingus",
+  "version": "0.1.0",
+  "description": "Bingus AI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agerr/bingus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Agerr/bingus/issues"
+  },
+  "homepage": "https://github.com/Agerr/bingus#readme",
+  "dependencies": {
+    "discord.js": "^14.7.1"
+  }
+}
