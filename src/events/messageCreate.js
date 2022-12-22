@@ -17,7 +17,7 @@ module.exports = {
 
         if (!command) return
 
-        // Check if command is guid only
+        // Check if command is guild only
         if (command.guildOnly && message.guild === null) return message.reply('This command is guild only')
       
         // Check for arguments
