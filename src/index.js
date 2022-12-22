@@ -1,25 +1,35 @@
-const Discord = require(`discord.js`),
-      client = new Discord.Client({ intents: 131071, partials: [`CHANNEL`]}),
-      config = require(`../config.json`);
+const { Client, GatewayIntentBits, version } = require('discord.js')
+const { readdirSync } = require('fs')
+const { token } = require('../config.json')
 
-console.log(`\nNode.js ${process.version}\n`);
-console.log(`Discord.js v${Discord.version}\n`);
 
-client.on("ready", () => {
+// Create client
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMembers
+    ]
+})
 
-    // Fetch all members
-    client.guilds.cache.forEach(guild => {
-        guild.members.fetch();
-    });
 
-    console.log(`Logged in as ${client.user.tag}!`);
-});
+// Print runtime info
+console.log(`Node.js\t\t${process.version}`)
+console.log(`Discord.js\tv${version}\n`)
 
-client.on("messageCreate", async message => {
-    
-    if (message.author.bot) return;
 
-    if (message.content.toLocaleLowerCase().includes("bingus")) message.channel.send("https://tenor.com/view/bingus-gif-18557268");
-});
+// Event handler
+readdirSync('./src/events').forEach(file => {
+    const event = require(`./events/${file}`)
 
-client.login(config.token);
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(client, ...args))
+    } else {
+        client.on(event.name, (...args) => event.execute(client, ...args))
+    }
+})
+
+
+// Login
+client.login(token)
