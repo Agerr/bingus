@@ -19,7 +19,7 @@ client.on("messageCreate", async message => {
     
     if (message.author.bot) return;
 
-    message.channel.send("Someone sent a message :face_with_raised_eyebrow:?");
+    if (message.content.toLocaleLowerCase().includes("bingus")) message.channel.send("https://tenor.com/view/bingus-gif-18557268");
 });
 
 client.login(config.token);
