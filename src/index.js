@@ -1,5 +1,5 @@
-const { Client, GatewayIntentBits, version } = require('discord.js')
-const { readdirSync } = require('fs')
+const { Client, GatewayIntentBits, Partials, version, Collection } = require('discord.js')
+const { readdirSync, readdir } = require('fs')
 const { token } = require('../config.json')
 
 
@@ -9,7 +9,11 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.DirectMessages
+    ],
+    partials: [
+        Partials.Channel
     ]
 })
 
@@ -17,6 +21,16 @@ const client = new Client({
 // Print runtime info
 console.log(`Node.js\t\t${process.version}`)
 console.log(`Discord.js\tv${version}\n`)
+
+
+// Load commands
+client.commands = new Collection()
+readdirSync('./src/commands').forEach(file => {
+    const command = require(`./commands/${file}`)
+    client.commands.set(command.name, command)
+
+    console.log(`Loaded ${file} as ${command.name}`)
+})
 
 
 // Event handler
