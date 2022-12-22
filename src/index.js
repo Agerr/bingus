@@ -10,24 +10,24 @@ const client = new Client({
     ]
 })
 
-console.log(`Node.js\t${process.version}`);
-console.log(`Discord.js\tv${version}\n`);
+console.log(`Node.js\t${process.version}`)
+console.log(`Discord.js\tv${version}\n`)
 
 client.on("ready", () => {
 
     // Fetch all members
     client.guilds.cache.forEach(guild => {
-        guild.members.fetch();
-    });
+        guild.members.fetch()
+    })
 
-    console.log(`Logged in as ${client.user.tag}!`);
-});
+    console.log(`Logged in as ${client.user.tag}!`)
+})
 
 client.on("messageCreate", async message => {
     
-    if (message.author.bot) return;
+    if (message.author.bot) return
 
-    if (message.content.toLocaleLowerCase().includes("bingus")) message.channel.send("https://tenor.com/view/bingus-gif-18557268");
-});
+    if (message.content.toLocaleLowerCase().includes("bingus")) message.channel.send("https://tenor.com/view/bingus-gif-18557268")
+})
 
-client.login(token);
+client.login(token)
