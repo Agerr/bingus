@@ -18,7 +18,7 @@ module.exports = {
         if (!command) return
 
         // Check if command is guid only
-        if (command.guildOnly && message.channel.type !== "text") return message.reply('This command is Guild only').catch()
+        if (command.guildOnly && message.channel.type !== "text") return message.reply('This command is guild only').catch()
       
         // Check for arguments
         if (command.args > args.length)
