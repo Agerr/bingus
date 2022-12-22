@@ -9,7 +9,8 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.DirectMessages
     ]
 })
 
@@ -23,8 +24,9 @@ console.log(`Discord.js\tv${version}\n`)
 client.commands = new Collection()
 readdirSync('./src/commands').forEach(file => {
     const command = require(`./commands/${file}`)
-
     client.commands.set(command.name, command)
+
+    console.log(`Loading ${file} as ${command.name}`)
 })
 
 
