@@ -1,6 +1,6 @@
-const { Client, GatewayIntentBits, version } = require("discord.js")
-const { readdirSync } = require("fs")
-const { token } = require("../config.json")
+const { Client, GatewayIntentBits, version } = require('discord.js')
+const { readdirSync } = require('fs')
+const { token } = require('../config.json')
 
 
 // Create client
@@ -20,7 +20,7 @@ console.log(`Discord.js\tv${version}\n`)
 
 
 // Event handler
-readdirSync("./src/events").forEach(file => {
+readdirSync('./src/events').forEach(file => {
     const event = require(`./events/${file}`)
 
     if (event.once) {
