@@ -18,7 +18,7 @@ module.exports = {
         if (!command) return
 
         // Check if command is guid only
-        if (command.guildOnly && message.guild === null) return message.reply('This command is guild only').catch()
+        if (command.guildOnly && message.guild === null) return message.reply('This command is guild only')
       
         // Check for arguments
         if (command.args > args.length)
@@ -27,8 +27,10 @@ module.exports = {
         // Execute command
         try {
             await command.execute(message, args, client)
+            console.log(`\x1b[32m${message.author.tag} (${message.author.id}) ran ${prefix}${command.name}\x1b[39m`)
           } catch (error) {
-            console.error(error)
+            console.error(`\x1b[31m${message.author.tag} (${message.author.id}) ran ${prefix}${command.name}\x1b[39m`)
+            console.error(`    ${error.stack.split('\n').splice(0, 2).join('\n')}`)
             message.reply('There was an error trying to execute that command')
           }
     }
