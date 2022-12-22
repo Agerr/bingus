@@ -5,7 +5,7 @@ module.exports = {
     name: Events.MessageCreate,
     async execute(client, message) {
         // Custom bingus command
-        if (message.author.id != client.user.id && message.content.toLowerCase().includes('bingus'))
+        if (message.author.id !== client.user.id && message.content.toLowerCase().includes('bingus'))
         message.reply('https://tenor.com/view/bingus-gif-18557268')
         
 
@@ -18,7 +18,7 @@ module.exports = {
         if (!command) return
 
         // Check if command is guid only
-        if (command.guildOnly && message.channel.type !== "text") return message.reply('This command is guild only').catch()
+        if (command.guildOnly && message.guild === null) return message.reply('This command is guild only').catch()
       
         // Check for arguments
         if (command.args > args.length)
