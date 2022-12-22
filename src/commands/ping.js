@@ -10,7 +10,7 @@ module.exports = {
     user: [],
   },
   async execute(message, args, client) {
-    message.channel.send('Calculating...').then(msg => {
+    await message.channel.send('Calculating...').then(msg => {
         msg.edit(`Bot latency: \`${msg.createdTimestamp - message.createdTimestamp}ms\`, Bot-API latency: \`${client.ws.ping}ms\``)
     })
   }
