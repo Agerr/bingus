@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, version, Collection } = require('discord.js')
+const { Client, GatewayIntentBits, Partials, version, Collection } = require('discord.js')
 const { readdirSync, readdir } = require('fs')
 const { token } = require('../config.json')
 
@@ -11,6 +11,9 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.DirectMessages
+    ],
+    partials: [
+        Partials.Channel
     ]
 })
 
