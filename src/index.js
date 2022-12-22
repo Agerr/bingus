@@ -1,6 +1,9 @@
 const { Client, GatewayIntentBits, version } = require("discord.js")
+const { readdirSync } = require("fs")
 const { token } = require("../config.json")
 
+
+// Create client
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -10,24 +13,23 @@ const client = new Client({
     ]
 })
 
-console.log(`Node.js\t${process.version}`)
+
+// Print runtime info
+console.log(`Node.js\t\t${process.version}`)
 console.log(`Discord.js\tv${version}\n`)
 
-client.on("ready", () => {
 
-    // Fetch all members
-    client.guilds.cache.forEach(guild => {
-        guild.members.fetch()
-    })
+// Event handler
+readdirSync("./src/events").forEach(file => {
+    const event = require(`./events/${file}`)
 
-    console.log(`Logged in as ${client.user.tag}!`)
+    if (event.once) {
+        client.once(event.name, (...args) => event.execute(client, ...args))
+    } else {
+        client.on(event.name, (...args) => event.execute(client, ...args))
+    }
 })
 
-client.on("messageCreate", async message => {
-    
-    if (message.author.bot) return
 
-    if (message.content.toLocaleLowerCase().includes("bingus")) message.channel.send("https://tenor.com/view/bingus-gif-18557268")
-})
-
+// Login
 client.login(token)
