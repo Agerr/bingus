@@ -5,6 +5,6 @@ module.exports = (client) => {
         const command = require(`../commands/${file}`)
         client.commands.set(command.name, command)
     
-        console.log(`Loaded ${file} as ${command.name}`)
+        console.log(`Loaded ${file} command`)
     })
 }

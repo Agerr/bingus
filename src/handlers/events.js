@@ -9,5 +9,7 @@ module.exports = (client) => {
         } else {
             client.on(event.name, (...args) => event.execute(client, ...args))
         }
+
+        console.log(`Loaded ${file} event`)
     })
 }

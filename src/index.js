@@ -28,7 +28,9 @@ client.commands = new Collection()
 
 // Require handlers
 ;['events', 'commands'].forEach(handler => {
+    console.log(`Loading ${handler}...`)    
     require(`./handlers/${handler}`)(client)
+    console.log()
 })
 
 
