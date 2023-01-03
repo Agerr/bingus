@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, Partials, version, Collection } = require('discord.js')
-const { readdirSync, readdir } = require('fs')
+const { readdirSync } = require('fs')
 const { token } = require('../config.json')
 
 
