@@ -32,7 +32,7 @@ module.exports = {
           } catch (error) {
             console.error(`\x1b[31m${message.author.tag} (${message.author.id}) ran ${prefix}${command.name}\x1b[39m`)
             console.error(`    ${error.stack.split('\n').splice(0, 2).join('\n')}`)
-            
+
             message.reply('There was an error trying to execute that command')
           }
     }
