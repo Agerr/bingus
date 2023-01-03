@@ -1,6 +1,6 @@
 module.exports = {
   name: 'ping',
-  description: 'Bot responds with pong',
+  description: 'Responds with the bot latency and API latency',
   aliases: ['latency'],
   usage: '',
   guildOnly: false,
