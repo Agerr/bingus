@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits, Partials, version, Collection } = require('discord.js')
-const { readdirSync, readdir } = require('fs')
-const { token } = require('../config.json')
+const { token } = require('../config/config.json')
 
 
 // Create client
@@ -23,25 +22,15 @@ console.log(`Node.js\t\t${process.version}`)
 console.log(`Discord.js\tv${version}\n`)
 
 
-// Load commands
+// Define global collections
 client.commands = new Collection()
-readdirSync('./src/commands').forEach(file => {
-    const command = require(`./commands/${file}`)
-    client.commands.set(command.name, command)
-
-    console.log(`Loaded ${file} as ${command.name}`)
-})
 
 
-// Event handler
-readdirSync('./src/events').forEach(file => {
-    const event = require(`./events/${file}`)
-
-    if (event.once) {
-        client.once(event.name, (...args) => event.execute(client, ...args))
-    } else {
-        client.on(event.name, (...args) => event.execute(client, ...args))
-    }
+// Require handlers
+;['events', 'commands'].forEach(handler => {
+    console.log(`Loading ${handler}...`)    
+    require(`./handlers/${handler}`)(client)
+    console.log()
 })
 
 

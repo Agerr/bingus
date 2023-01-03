@@ -1,5 +1,5 @@
 const { Events } = require('discord.js')
-const { prefix } = require('../../config.json')
+const { prefix } = require('../../config/config.json')
 
 module.exports = {
     name: Events.MessageCreate,
@@ -27,10 +27,12 @@ module.exports = {
         // Execute command
         try {
             await command.execute(message, args, client)
+            
             console.log(`\x1b[32m${message.author.tag} (${message.author.id}) ran ${prefix}${command.name}\x1b[39m`)
           } catch (error) {
             console.error(`\x1b[31m${message.author.tag} (${message.author.id}) ran ${prefix}${command.name}\x1b[39m`)
             console.error(`    ${error.stack.split('\n').splice(0, 2).join('\n')}`)
+
             message.reply('There was an error trying to execute that command')
           }
     }
